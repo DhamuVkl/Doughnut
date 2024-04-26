@@ -1,3 +1,8 @@
+#include <stdio.h>  // For printf
+#include <string.h> // For memset
+#include <math.h>   // For sin, cos
+#include <unistd.h> // For usleep
+
 int main()
 {
     float A = 0, B = 0;
