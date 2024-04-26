@@ -1,20 +1,16 @@
-import pygame
 import math
 import colorsys
+import time
 
-pygame.init()
-
-white = (255, 255, 255)
-black = (0, 0, 0)
 hue = 0
 
-WIDTH = 1920
-HEIGHT = 1080
+WIDTH = 80
+HEIGHT = 24
 
 x_start, y_start = 0, 0
 
-x_separator = 10
-y_separator = 20
+x_separator = 2
+y_separator = 4
 
 rows = HEIGHT // y_separator
 columns = WIDTH // x_separator
@@ -30,20 +26,16 @@ phi_spacing = 1
 
 chars = ".,-~:;=!*#$@"
 
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-
 def hsv2rgb(h, s, v):
     return tuple(round(i * 255) for i in colorsys.hsv_to_rgb(h, s, v))
 
-def text_display(letter, x_start, y_start):
-    text = font.render(str(letter), True, hsv2rgb(hue, 1, 1))
-    screen.blit(text, (x_start, y_start))
-
-font = pygame.font.SysFont('Arial', 18, bold=True)
+def text_display(letter):
+    print(letter, end="", flush=True)
 
 run = True
 while run:
-    screen.fill(black)
+    print("\033[2J", end="")  # Clear the terminal
+    print("\033[H", end="")   # Move cursor to home position
 
     z = [0] * screen_size
     b = [' '] * screen_size
@@ -76,21 +68,13 @@ while run:
         A += 0.00004
         B += 0.00002
         if i == 0 or i % columns:
-            text_display(b[i], x_start, y_start)
+            text_display(b[i])
             x_start += x_separator
         else:
             y_start += y_separator
             x_start = 0
-            text_display(b[i], x_start, y_start)
+            text_display(b[i])
             x_start += x_separator
 
-    pygame.display.update()
-
     hue += 0.005
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_ESCAPE:
-                run = False
+    time.sleep(0.03)  # Adjust the delay to control the speed of the animation
