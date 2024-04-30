@@ -1,7 +1,7 @@
 #include <stdio.h>  // For printf
 #include <string.h> // For memset
 #include <math.h>   // For sin, cos
-#include <unistd.h> // For usleep
+//#include <unistd.h> // For usleep
 
 int main()
 {
@@ -48,7 +48,7 @@ int main()
             A += 0.00004;
             B += 0.00002;
         }
-        usleep(30000);
+       // usleep(30000);
     }
     return 0;
 }
